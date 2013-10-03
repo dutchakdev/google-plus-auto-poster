@@ -1,0 +1,118 @@
+body {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #555;
+}
+p {
+	line-height:1.5em
+}
+.clr {
+	clear:both;
+	font-size:1px;
+	height:1px;
+}
+/* float clearing for IE6 */
+* html .clearfix {
+	height: 1%;
+	overflow: visible;
+}
+/* float clearing for IE7 */
+*+html .clearfix {
+	min-height: 1%;
+}
+/* float clearing for everyone else */
+.clearfix:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+	font-size: 0;
+}
+h2 {
+	font-family:Verdana, Geneva, sans-serif;
+	margin-bottom:10px;
+	border-bottom:1px solid #DDDDDD;
+	padding-bottom:10px;
+	font-size: medium;
+}
+.form-table th {
+	width:30% !important;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 15px;
+	color:#919191;
+}
+.error {
+	border-color:#F00 !important;
+}
+td label {
+	display:none !important;
+}
+div.error {
+	width: 40%;
+	margin-bottom:10px;
+	color:#FFFFFF;
+	background-color: #ee432e;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ee432e), color-stop(50%, #c63929), color-stop(50%, #b51700), color-stop(100%, #891100));
+	background-image: -webkit-linear-gradient(top, #ee432e 0%, #c63929 50%, #b51700 50%, #891100 100%);
+	background-image: -moz-linear-gradient(top, #ee432e 0%, #c63929 50%, #b51700 50%, #891100 100%);
+	background-image: -ms-linear-gradient(top, #ee432e 0%, #c63929 50%, #b51700 50%, #891100 100%);
+	background-image: -o-linear-gradient(top, #ee432e 0%, #c63929 50%, #b51700 50%, #891100 100%);
+	background-image: linear-gradient(top, #ee432e 0%, #c63929 50%, #b51700 50%, #891100 100%);
+	-webkit-border-radius: 10px;
+	font-family: Verdana, Geneva, sans-serif;
+	text-align: center;
+	border-radius: 10px;
+	padding: 15px 10px;
+}
+div.error a {
+	color: #333333;
+	text-decoration: none;
+}
+div.error a:hover {
+	color: #333333;
+	text-decoration:underline;
+}
+div.success {
+	width: 40%;
+	margin-bottom:10px;
+	color:#FFFFFF;
+	background-color: #00f51d;
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #00f51d), color-stop(50%, #2ac448), color-stop(50%, #00b31b), color-stop(100%, #029e21));
+	background-image: -webkit-linear-gradient(top, #00f51d 0%, #2ac448 50%, #00b31b 50%, #029e21 100%);
+	background-image: -moz-linear-gradient(top, #00f51d 0%, #2ac448 50%, #00b31b 50%, #029e21 100%);
+	background-image: -ms-linear-gradient(top, #00f51d 0%, #2ac448 50%, #00b31b 50%, #029e21 100%);
+	background-image: -o-linear-gradient(top, #00f51d 0%, #2ac448 50%, #00b31b 50%, #029e21 100%);
+	background-image: linear-gradient(top, #00f51d 0%, #2ac448 50%, #00b31b 50%, #029e21 100%);
+	-webkit-border-radius: 10px;
+	font-family: Verdana, Geneva, sans-serif;
+	text-align: center;
+	border-radius: 10px;
+	padding: 15px 10px;
+	margin-left:15px;
+}
+.googleplusbody {
+	background:#fff;
+	border:1px solid #bbb;
+	padding:15px;
+	margin:0 0 15px 0;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	-moz-box-shadow:0 0 8px #bbb;
+	-webkit-box-shadow:0 0 8px #bbb;
+	box-shadow:0 0 8px #bbb;
+}
+#googleboxes {
+	width: 45%;
+	color:#919191;
+}
+.googleforminput {
+	float: left;
+	height: 36px;
+	width: 85%;
+}
+.extbutton {
+	height: 40px !important;
+	width: 115px !important;
+}
