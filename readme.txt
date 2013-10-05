@@ -20,7 +20,7 @@ time and connect with friends and relative easily using GPAP. You have to just w
 
 Google Plus auto poster special used for wordpress. **This plugin through easy and fast auto sharing in google plus**
 
-GPAP Auto Post for to following pages
+GPAP Auto Post for to following pages on wordress.org
 <ul>
 <li>Google plus profile</li>
 </ul>
