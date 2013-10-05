@@ -18,6 +18,8 @@ Google plus Auto Poster (GPAP) is Social networks wordpress plugin that gives yo
 announcements of your posts to most popular Social Network site Google Plus. With the Use of GPAP you can save your valuable 
 time and connect with friends and relative easily using GPAP. You have to just write the post and API will do the rest. 
 
+How to create google pages and communities for google share. You can see that link <a href="http://www.wpsuperplugin.com/screen-shot/" target="_blank">Screenshot</a>
+
 Google Plus auto poster special used for wordpress. **This plugin through easy and fast auto sharing in google plus**
 
 GPAP Auto Post for to following pages on wordress.org
@@ -32,6 +34,8 @@ Pro version available on - <a href="http://www.wpsuperplugin.com/download/google
 <li>Google plus Business Pages</li>
 <li>Google plus Communities</li>
 </ul>
+
+For more detail please vist our website <a href="http://wpsuperplugin.com/">http://wpsuperplugin.com/</a>
 
 == Installation ==
 
@@ -87,3 +91,4 @@ For more screenshot please vist our website <a href="http://www.wpsuperplugin.co
 == Upgrade Notice ==
 
 Just replace plugin files, the rest will be updated automatically.
+
