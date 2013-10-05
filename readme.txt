@@ -23,6 +23,12 @@ Google Plus auto poster special used for wordpress. **This plugin through easy a
 GPAP Auto Post for to following pages
 <ul>
 <li>Google plus profile</li>
+</ul>
+
+
+Pro version available on - <a href="http://www.wpsuperplugin.com/download/google-auto-poster/" target="_blank">WPSuperPlugin</a>
+<ul>
+<li>Google plus profile</li>
 <li>Google plus Business Pages</li>
 <li>Google plus Communities</li>
 </ul>
