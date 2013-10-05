@@ -92,8 +92,3 @@ For more screenshot please vist our website <a href="http://www.wpsuperplugin.co
 
 Just replace plugin files, the rest will be updated automatically.
 
-
-== Arbitrary section ==
-
-
-== A brief Markdown Example ==
