@@ -1,10 +1,10 @@
 === Google Plus Auto Poster ===
-Contributors: Google Plus Auto Poster
+Contributors: Subhash8108
 Donate link: http://www.wpsuperplugin.com/download/google-auto-poster/
 Tags: google plus, google plus auto poster, google plus post, google plus auto post, google plus auto share, social network auto poster, google plus wordpress Plugin, google plus auto poster Plugin, google plus auto share Plugin, automation, autopost, auto-post, auto post, socialnetworks, socialnetwork, social networks, social network, google+, auto post to google plus wordpress
 Requires at least: 3.6
 Tested up to: 3.6
-Stable tag: 4.3This plugin automatically publishes posts from on your google profile page
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
