@@ -1,7 +1,7 @@
 === Google Plus Auto Poster ===
 Contributors: Subhash8108
 Donate link: http://www.wpsuperplugin.com/download/google-auto-poster/
-Tags: google plus, google plus auto poster, google plus post, google plus auto post, google plus auto share, social network auto poster, google plus wordpress Plugin, google plus auto poster Plugin, google plus auto post Plugin, google plus auto share Plugin, google+, auto post to google plus
+Tags: auto-post, google plus, google plus post, google plus auto post, google plus auto share, social network auto poster, google+, google+ post, google+ auto post,google plus auto poster, social network, google
 Requires at least: 3.6
 Tested up to: 3.6
 Stable tag: 1.0
