@@ -90,7 +90,7 @@ $statusgpap =get_option( 'wpsp_gpapoptionstatus');
         </p>
       </form>
     </div>
-    <div>Check official website for more information <a href="http://www.wpsuperplugin.com/download/google-auto-poster/">click here</a></div>
+    <div>Check official website for more information <a target="_blank" href="http://www.wpsuperplugin.com/download/google-auto-poster/">click here</a></div>
   </div>
 </div>
 </div>
