@@ -12,7 +12,6 @@
 function wpsp_googleplus_deactiveplugin()
 {
 	global $wpdb;
-	//delete_option('wpsp_gpapoption');
 	
 }
 register_deactivation_hook( __FILE__, 'wpsp_googleplus_deactiveplugin' );
@@ -23,7 +22,7 @@ function wpsp_googleplus_dropplugin()
 {
 	global $wpdb;
 	delete_option('wpsp_gpapoption');
-
+	delete_option('wpsp_gpapoptionstatus');
 }
 register_uninstall_hook( __FILE__, 'wpsp_googleplus_dropplugin' );
 
@@ -91,10 +90,10 @@ $statusgpap =get_option( 'wpsp_gpapoptionstatus');
         </p>
       </form>
     </div>
+    <div>Check official website for more information <a href="http://www.wpsuperplugin.com/download/google-auto-poster/">click here</a></div>
   </div>
 </div>
 </div>
-<!--   <div><button name="synchronize" id="synchronize" class="button-primary" >Test</button></div>-->
 <?php
 }
 
