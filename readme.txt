@@ -12,7 +12,7 @@ Automatically re-publishes blogposts to Google+ profiles and/or pages
 
 == Description ==
 
-**Notes: Dute to Google new update on it's site Right now we are working on new version, we shortly  provide you version 1.1 until old version not working**
+**Notes: Due to Google new update on it's site Right now we are working on new version, we shortly  provide you version 1.1 until old version not working**
 
 **This plugin automatically publishes posts from your blog to your Social Network accounts**
 
