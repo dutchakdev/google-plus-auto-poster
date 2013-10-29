@@ -71,7 +71,7 @@ $statusgpap =get_option( 'wpsp_gpapoptionstatus');
   <?php
   wp_enqueue_script("authvalidationjs", plugins_url( '/js/jquery.validate.js' , __FILE__ ), array("jquery"));
   wp_enqueue_script("authjs", plugins_url( '/js/authontication_check.js' , __FILE__ ), array("jquery"));
-  ?>
+  ?><div><span style="color:#F00; font-weight:bold;">Notes: </span>Due to Google new update on it's site Right now we are working on new version, we shortly  provide you version 1.1 until old version not working</div>
     <h2>Google Plus Auto Post</h2>
     <div>
       <form action="admin.php?page=wpspgpap_authontication" method="post" name="authform" id="authform">
