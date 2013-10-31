@@ -4,7 +4,7 @@
    Plugin Name: Google Plus Auto Poster
    Plugin URI: http://www.wpsuperplugin.com
    Description: This plugin automatically publishes posts from on your google profile page
-   Version: 1.0
+   Version: 1.1
    Author: Mr.Subhash Patel
    Author URI: http://www.wpsuperplugin.com
    */
