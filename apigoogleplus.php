@@ -14,9 +14,9 @@ if (!(function_exists("prr")))
 		return;
 	};
 }
-if (!(function_exists("CutFromTo")))
+if (!(function_exists("cutfromto")))
 {
-	function CutFromTo($string, $from, $to) {
+	function cutfromto($string, $from, $to) {
 
 		$fstart = stripos($string, $from);
 		$tmp = substr($string, $fstart + strlen($from));
@@ -128,6 +128,7 @@ if (!(function_exists("getCurlPageMC")))
 		static $curl_loops = 0;
 		static $curl_max_loops = 20;
 		global $wpsp_gCookiesArr;
+		global $wpsp_cookiesarrayBD;
 		$cookies = cookarrtostr($wpsp_gCookiesArr);
 		if ($dbg)
 		{
@@ -140,13 +141,25 @@ if (!(function_exists("getCurlPageMC")))
 			return false;
 		}
 		$headers = array();
-		$headers[] = "Accept: text/html, application/xhtml+xml, */*";
+		$headers[] = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
 		$headers[] = "Cache-Control: no-cache";
 		$headers[] = "Connection: Keep-Alive";
-		$headers[] = "Accept-Language: en-us";
+		$headers[] = "Accept-Language: en-US,en;q=0.8";
 		if ($fields != "")
 		{
+			if (stripos($ccURL, "http://www.blogger.com/blogger_rpc") !== false)
+			{
+				$headers[] = "Content-Type: application/javascript; charset=UTF-8";
+			}
+			else 
+			{
 				$headers[] = "Content-Type: application/x-www-form-urlencoded;charset=utf-8";
+			}
+		}
+		if (stripos($ccURL, "http://www.blogger.com/blogger_rpc") !== false)
+		{
+			$headers[] = "X-GWT-Permutation: F8570AFBBDB4C20A963499D59CE98B57";
+			$headers[] = "X-GWT-Module-Base: http://www.blogger.com/static/v1/gwt/";
 		}
 		if (isset($advSettings["liXMLHttpRequest"]))
 		{
@@ -156,11 +169,16 @@ if (!(function_exists("getCurlPageMC")))
 		{
 			$headers[] = "Origin: " . $advSettings["Origin"];
 		}
+		if ((stripos($ccURL, "blogger.com") !== false) && ((isset($advSettings["cdomain"])) && ($advSettings["cdomain"] == "google.com")))
+		{
+			$pmp_setting_array["cdomain"] = "blogger.com";
+		}
 		if (isset($advSettings["noSSLSec"]))
 		{
 			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 		}
+		
 		if (isset($advSettings["proxy"]) && $advSettings["proxy"]["host"] != "" && $advSettings["proxy"]["port"] !== "")
 		{
 			if ($dbg)
@@ -191,7 +209,7 @@ if (!(function_exists("getCurlPageMC")))
 		{
 			curl_setopt($ch, CURLOPT_REFERER, $ref);
 		}
-		curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)");
+		curl_setopt($ch, CURLOPT_USERAGENT, (isset($advSettings["UA"])) && ($advSettings["UA"] != "") ? $advSettings["UA"] : "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.44 Safari/537.36");
 		if ($fields != "")
 		{
 			curl_setopt($ch, CURLOPT_POST, true);
@@ -203,6 +221,7 @@ if (!(function_exists("getCurlPageMC")))
 			curl_setopt($ch, CURLOPT_POSTFIELDS, "");
 			curl_setopt($ch, CURLOPT_HTTPGET, true);
 		}
+		
 		curl_setopt($ch, CURLOPT_TIMEOUT, 20);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
 		$content = curl_exec($ch);
@@ -211,6 +230,14 @@ if (!(function_exists("getCurlPageMC")))
 		{
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 			$content = curl_exec($ch);
+		}
+		if ((strpos($content, "\n\n") != false) && strpos($content, "\n\n") < 100)
+		{
+			$content = substr_replace($content, "\n", strpos($content, "\n\n"), strlen("\n\n"));
+		}
+		if ((strpos($content, "\r\n\r\n") != false) && strpos($content, "\r\n\r\n") < 100)
+		{
+			$content = substr_replace($content, "\r\n", strpos($content, "\r\n\r\n"), strlen("\r\n\r\n"));
 		}
 		$ndel = strpos($content, "\n\n");
 		$rndel = strpos($content, "\r\n\r\n");
@@ -223,6 +250,7 @@ if (!(function_exists("getCurlPageMC")))
 			$rndel = 100000;
 		}
 		$rrDel = $ndel > $rndel ? "\r\n\r\n" : "\n\n";
+		
 		list($header, $content) = explode($rrDel, $content, 2);
 		if ($ctOnly !== true)
 		{
@@ -236,6 +264,7 @@ if (!(function_exists("getCurlPageMC")))
 		}
 		$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		$headers = curl_getinfo($ch);
+		
 		if ($dbg)
 		{
 			echo "<br/><b style=\"color:#005800;\">## Headers:</b><br/>";
@@ -243,11 +272,23 @@ if (!(function_exists("getCurlPageMC")))
 			prr($header);
 		}
 		$results = array();
+		preg_match_all("|Host: (.*)\\n|U", $headers["request_header"], $results);
+		$ckDomain = str_replace(".", "_", $results[1][0]);
+		$ckDomain = str_replace("\r", "", $ckDomain);
+		$ckDomain = str_replace("\n", "", $ckDomain);
+		if ($pmp_backgrd_check)
+		{
+			echo "<br/><b style=\"color:#005800;\">## Domain:</b><br/>";
+			prr($ckDomain);
+		}
+		
+		$results = array();
 		$cookies = "";
 		preg_match_all("|Set-Cookie: (.*);|U", $header, $results);
 		$carTmp = $results[1];
 		preg_match_all("/Set-Cookie: (.*)\\b/", $header, $xck);
 		$xck = $xck[1];
+		
 		if ($dbg)
 		{
 			echo "Full Resp Cookies";
@@ -255,6 +296,7 @@ if (!(function_exists("getCurlPageMC")))
 			echo "Plain Resp Cookies";
 			prr($carTmp);
 		}
+		
 		if (isset($advSettings["cdomain"]) && $advSettings["cdomain"] != "")
 		{
 			foreach ($carTmp as $iii => $cTmp)
@@ -268,7 +310,7 @@ if (!(function_exists("getCurlPageMC")))
 				continue;
 			}
 		}
-		 else 
+		else 
 		{
 			foreach ($carTmp as $cTmp)
 			{
@@ -277,26 +319,41 @@ if (!(function_exists("getCurlPageMC")))
 				continue;
 			}
 		}
+		foreach ($carTmp as $cTmp)
+		{
+			$ttt = explode("=", $cTmp, 2);
+			$wpsp_cookiesarrayBD[$ckDomain][$ttt[0]] = $ttt[1];
+			continue;
+		}
 		if ($dbg)
 		{
-			echo "<br/><b style=\"color:#005800;\">## Response/Common Cookies:</b><br/>";
+			echo "<br/><b style=\"color:#005800;\">## Common/Response Cookies:</b><br/>";
 			prr($wpsp_gCookiesArr);
+			echo "\r
+\r
+<br/>" . $ckDomain . "\r\n\r\n";
+			prr($wpsp_cookiesarrayBD);
 		}
+		
 		if ($dbg && $http_code == 200)
 		{
 			$contentH = htmlentities($content);
-			prr($contentH);
+			prr($contentH);			
 		}
 		$rURL = "";
+		
 		if ($http_code == 200 && stripos($content, "http-equiv=\"refresh\" content=\"0; url=&#39;") !== false)
 		{
 			$http_code = 301;
 			$rURL = cutfromto($content, "http-equiv=\"refresh\" content=\"0; url=&#39;", "&#39;\"");
-			$wpsp_gCookiesArr = array();
+			if (stripos($rURL, "blogger.com") === false)
+			{
+				$wpsp_gCookiesArr = array();
+			}
 		}
-		 else 
+		else 
 		{
-			if ($http_code == 200 && stripos($content, "location.replace") !== false)
+			if (($http_code == 200) && (stripos($content, "location.replace") !== false))
 			{
 				$http_code = 301;
 				$rURL = cutfromto($content, "location.replace(\"", "\"");
@@ -308,27 +365,27 @@ if (!(function_exists("getCurlPageMC")))
 			{
 				$rURL = str_replace("\\x3d", "=", $rURL);
 				$rURL = str_replace("\\x26", "&", $rURL);
-				$url = parse_url($rURL);
+				$url = @parse_url($rURL);
 			}
 			 else 
 			{
 				$matches = array();
 				preg_match("/Location:(.*?)\\n/", $header, $matches);
-				$url = parse_url(trim(array_pop($matches)));
+				$url = @parse_url(trim(array_pop($matches)));
 			}
 			$rURL = "";
 			if (!$url)
 			{
 				$curl_loops = 0;
-				return $ctOnly === true ? $content : $nsheader;
+				return $pmp_ocheck === true ? $content : $nsheader;
 			}
 			$last_urlX = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
-			$last_url = parse_url($last_urlX);
-			if (!$url["scheme"])
+			$last_url = @parse_url($last_urlX);
+			if (!(isset($url["scheme"])))
 			{
 				$url["scheme"] = $last_url["scheme"];
 			}
-			if (!$url["host"])
+			if (!(isset($url["host"])))
 			{
 				$url["host"] = $last_url["host"];
 			}
@@ -352,9 +409,10 @@ if (!(function_exists("getCurlPageMC")))
 		return $ctOnly === true ? $content : $nsheader;
 	};
 }
+
 if (!(function_exists("getCurlPageX")))
 {
-	function getCurlPageX($url, $ref = "", $ctOnly = false, $fields = "", $dbg = false, $advSettings = "") {
+	function getcurlpagex($url, $ref = "", $ctOnly = false, $fields = "", $dbg = false, $advSettings = "") {
 
 		if ($dbg)
 		{
@@ -366,6 +424,7 @@ if (!(function_exists("getCurlPageX")))
 		return $contents;
 	};
 }
+
 if (!(function_exists("doConnectToGooglePlus")))
 {
 	function doConnectToGooglePlus($connectID, $email, $pass) {
@@ -392,6 +451,7 @@ if (!(function_exists("conncetwithgoogleplus")))
 	function conncetwithgoogleplus($email, $pass, $srv = "GP") {
 
 		global $wpsp_gCookiesArr;
+		global $wpsp_gCookiesArrBD;
 		global $gPlusRecoveryEmail;
 		global $gPlusRecoveryPhone;
 		$wpsp_gCookiesArr = array();
@@ -415,6 +475,7 @@ if (!(function_exists("conncetwithgoogleplus")))
 			}
 		}
 		$err = wpspCheckSSLCurl("https://accounts.google.com/ServiceLogin");
+		
 		if ($err !== false && $err["errNo"] == "60")
 		{
 			$advSettings["noSSLSec"] = true;
@@ -425,35 +486,50 @@ if (!(function_exists("conncetwithgoogleplus")))
 		}
 		if ($srv == "YT")
 		{
-			$lpURL = "https://accounts.google.com/ServiceLogin?passive=true&continue=http%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26feature%3Dsign_in_button%26hl%3Den_US%26next%3D%252F%253Fnoredirect%253D1%26nomobiletemp%3D1&hl=en_US&uilel=3&service=youtube";
+			$lpURL = "https://accounts.google.com/ServiceLogin?service=oz&checkedDomains=youtube&checkConnection=youtube%3A271%3A1%2Cyoutube%3A69%3A1&continue=https://www.youtube.com/&hl=en-US";
 		}
+		if ($srv == "BG")
+		{
+			$lpURL = "https://accounts.google.com/ServiceLogin?service=blogger&passive=1209600&continue=http://www.blogger.com/home&followup=http://www.blogger.com/home&ltmpl=start#s01";
+		}
+		
 		$contents = getcurlpagex($lpURL, "", true, "", false, $advSettings);
+		
 		$md = array();
 		$mids = "";
-		while (stripos($contents, "\"hidden\"") !== false)
+		$flds = array();
+		
+		while (stripos($contents, "<input") !== false)
 		{
-			$contents = substr($contents, stripos($contents, "\"hidden\"") + 8);
-			$name = trim(cutfromto($contents, "name=\"", "\""));
-			if (!!(in_array($name, $md)))
+			$inpField = trim(cutfromto($contents, "<input", ">"));
+			$name = trim(cutfromto($inpField, "name=\"", "\""));
+			
+			if ((stripos($inpField, "\"hidden\"") !== false) && ($name != "") && !(in_array($name, $md)))
 			{
-				continue;
+				$md[] = $name;
+				$val = trim(cutfromto($inpField, "value=\"", "\""));
+				$flds[$name] = $val;
+				$mids .= "&" . $name . "=" . $val;
 			}
-			$md[] = $name;
-			$val = trim(cutfromto($contents, "value=\"", "\""));
-			$flds[$name] = $val;
-			$mids .= "&" . $name . "=" . $val;
+			$contents = substr($contents, stripos($contents, "<input") + 8);
 			continue;
 		}
+		
 		$flds["Email"] = $email;
 		$flds["Passwd"] = $pass;
 		$flds["signIn"] = "Sign%20in";
 		$fldsTxt = build_http_query($flds);
-		if ($srv == "GP")
+		if ($srv == "GP" || $srv == "BG")
 		{
 			$advSettings["cdomain"] = "google.com";
 		}
 		$contents = getcurlpagex("https://accounts.google.com/ServiceLoginAuth", "", false, $fldsTxt, false, $advSettings);
-		if (stripos($contents["url"], "https://accounts.google.com/ServiceLoginAuth") !== false && stripos($contents["content"], "<span color=\"red\">") !== false)
+		if ($srv == "YT")
+		{
+			unset($advSettings["cdomain"]);
+			$wpsp_gCookiesArr = $wpsp_gCookiesArrBD["accounts_youtube_com"];
+		}
+		if ((stripos($contents["url"], "https://accounts.google.com/ServiceLoginAuth") !== false) && (stripos($contents["content"], "<span color=\"red\">") !== false))
 		{
 			return cutfromto($contents["content"], "<span color=\"red\">", "</span>");
 		}
@@ -465,16 +541,16 @@ if (!(function_exists("conncetwithgoogleplus")))
 		{
 			return "Captcha is \"On\" for your account. Please login to your account from the bworser and try clearing the CAPTCHA by visiting this link: <a href=\"https://www.google.com/accounts/DisplayUnlockCaptcha\" target=\"_blank\">https://www.google.com/accounts/DisplayUnlockCaptcha</a>. If you're a Google Apps user, visit https://www.google.com/a/yourdomain.com/UnlockCaptcha in order to clear the CAPTCHA. Be sure to replace 'yourdomain.com' with your actual domain name.";
 		}
+		
 		if (stripos($contents["url"], "ServiceLoginAuth") !== false)
 		{
 			return "Incorrect Username/Password " . $contents["errmsg"];
 		}
-		if (stripos($contents["url"], "google.com/SmsAuth") !== false)
+		if (stripos($contents["url"], "google.com/SmsAuth") !== false || stripos($contents["url"], "google.com/SecondFactor") !== false)
 		{
-			
-			return "2-step verification in on.";
-			
+			return "2-step verification in on.";	
 		}
+		$contents["content"] = str_ireplace("'CREATE_CHANNEL_DIALOG_TITLE_IDV_CHALLENGE': \"Verify your identity\"", "", $contents["content"]);
 		if (stripos($contents["content"], "is that really you") !== false || stripos($contents["content"], "Verify your identity") !== false || stripos($contents["url"], "LoginVerification") !== false)
 		{
 			$text = $contents["content"];

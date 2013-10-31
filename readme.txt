@@ -12,8 +12,6 @@ Automatically re-publishes blogposts to Google+ profiles and/or pages
 
 == Description ==
 
-**Notes: Due to Google new update on it's site Right now we are working on new version, we shortly  provide you version 1.1 until old version not working**
-
 **This plugin automatically publishes posts from your blog to your Social Network accounts**
 
 Google plus Auto Poster (GPAP) is Social networks wordpress plugin that gives you an ability to automatically re-post your posts or 
@@ -89,6 +87,9 @@ For more screenshot please vist our website <a href="http://www.wpsuperplugin.co
 
 = 1.0 =
 * Ability to share your post in google plus profile page
+
+= 1.1 =
+* Google New Update for One Google Account for everything Google
 
 == Upgrade Notice ==
 
