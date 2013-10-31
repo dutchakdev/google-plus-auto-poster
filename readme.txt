@@ -4,7 +4,7 @@ Donate link: http://www.wpsuperplugin.com/download/google-auto-poster/
 Tags: auto-post, google plus, google plus post, google plus auto post, google plus auto share, social network auto poster, google+, google+ post, google+ auto post,google plus auto poster, social network, google
 Requires at least: 3.6
 Tested up to: 3.6
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
