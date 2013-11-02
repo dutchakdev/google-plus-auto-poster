@@ -92,7 +92,7 @@ $statusgpap =get_option( 'wpsp_gpapoptionstatus');
     </div>
     <div style="font-size: 10px;">For business and communities page available on pro version at <a href="http://www.wpsuperplugin.com/download/google-auto-poster/" target="_blank">http://www.wpsuperplugin.com/</a></div>
   </div>
-  <div class="notes">Enter Gmail Account Email Address and Password In Form</div>
+  <div class="notes">Enter Google Account Email Address and Password In Form</div>
 </div>
 </div>
 <?php
