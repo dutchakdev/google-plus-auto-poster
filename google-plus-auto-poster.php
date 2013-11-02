@@ -72,16 +72,16 @@ $statusgpap =get_option( 'wpsp_gpapoptionstatus');
   wp_enqueue_script("authvalidationjs", plugins_url( '/js/jquery.validate.js' , __FILE__ ), array("jquery"));
   wp_enqueue_script("authjs", plugins_url( '/js/authontication_check.js' , __FILE__ ), array("jquery"));
   ?>
-    <h2>Google Plus Auto Post</h2>
+    <h2>Google Plus Auto Poster</h2>
     <div>
       <form action="admin.php?page=wpspgpap_authontication" method="post" name="authform" id="authform">
         <table class="form-table" width="100%">
           <tr valign="top">
-            <th scope="row">Email Address:</th>
+            <th scope="row">Gmail Email Address:</th>
             <td><input type="text" name="username" class="googleforminput" id="username" value="<?php echo $wpapgetoption['username']; ?>" /></td>
           </tr>
           <tr valign="top">
-            <th scope="row">Password:</th>
+            <th scope="row">Gmail Password:</th>
             <td><input type="password" name="password" class="googleforminput" id="password" value="<?php echo $wpapgetoption['password']; ?>" /></td>
           </tr>
         </table>
@@ -92,6 +92,7 @@ $statusgpap =get_option( 'wpsp_gpapoptionstatus');
     </div>
     <div style="font-size: 10px;">For business and communities page available on pro version at <a href="http://www.wpsuperplugin.com/download/google-auto-poster/" target="_blank">http://www.wpsuperplugin.com/</a></div>
   </div>
+  <div class="notes">Enter Gmail Account Email Address and Password In Form</div>
 </div>
 </div>
 <?php
