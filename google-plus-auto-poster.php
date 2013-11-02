@@ -77,11 +77,11 @@ $statusgpap =get_option( 'wpsp_gpapoptionstatus');
       <form action="admin.php?page=wpspgpap_authontication" method="post" name="authform" id="authform">
         <table class="form-table" width="100%">
           <tr valign="top">
-            <th scope="row">Gmail Email Address:</th>
+            <th scope="row">Email Address:</th>
             <td><input type="text" name="username" class="googleforminput" id="username" value="<?php echo $wpapgetoption['username']; ?>" /></td>
           </tr>
           <tr valign="top">
-            <th scope="row">Gmail Password:</th>
+            <th scope="row">Password:</th>
             <td><input type="password" name="password" class="googleforminput" id="password" value="<?php echo $wpapgetoption['password']; ?>" /></td>
           </tr>
         </table>
