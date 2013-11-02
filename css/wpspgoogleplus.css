@@ -116,3 +116,7 @@ div.success {
 	height: 40px !important;
 	width: 115px !important;
 }
+.notes
+{
+	background-color:#F00; color: #fff; font-weight: bold; text-align: center; padding: 10px; border-radius: 5px 5px 5px 5px;
+}
