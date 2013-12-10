@@ -143,9 +143,9 @@ function wpspgpap()
 				}
 				else
 				{
-					$link = wpspgetlinkandtitle($content_post->guid);
+					$link = $content_post->guid;
 					$contentsss = get_post_field('post_content', $my_postid);
-					googlepluspostfromwpsp($contentsss,$link);	
+					wpspgetlinkandtitle($contentsss,$link);	
 					 
 				}
 			}
