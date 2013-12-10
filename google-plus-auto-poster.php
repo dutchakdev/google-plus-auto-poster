@@ -133,7 +133,12 @@ function wpspgpap()
 				{
 					$link = array('img'=>$thumbnilcheck,'link'=>$gpap_guid,'domain'=>'','title'=>$gpap_title,'txt'=>'');
 					$contentsss = get_post_field('post_content', $my_postid);
-					googlepluspostfromwpsp($contentsss,$link);	
+					$images = $thumbnilcheck;
+					$link = $gpap_guid;
+					$domain = $domain;
+					$title = $gpap_title;
+					$txt = $txt;
+					googlepluspostfromwpsp($contentsss,$images,$link,$domain,$title,$txt);	
 					
 				}
 				else
