@@ -131,7 +131,6 @@ function wpspgpap()
 				
 				if($thumbnilcheck!="")
 				{
-					$link = array('img'=>$thumbnilcheck,'link'=>$gpap_guid,'domain'=>'','title'=>$gpap_title,'txt'=>'');
 					$contentsss = get_post_field('post_content', $my_postid);
 					$images = $thumbnilcheck;
 					$link = $gpap_guid;
