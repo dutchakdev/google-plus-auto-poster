@@ -43,7 +43,7 @@ function wpspgpap_authon()
 	{
 		if($_POST['username']!="" && $_POST['password']!="")         
 		{     
-			require_once('apigoogleplus.php');
+			require_once('googleplus.php');
 		        
 			//Option Value                                 
 			if ( get_option( 'wpsp_gpapoption' ) !== false  )   update_option( 'wpsp_gpapoption' , $_POST );            else                                                add_option('wpsp_gpapoption' , $_POST );       
@@ -110,7 +110,7 @@ function wpspgpap()
 	
 	if($gettype=='post')
 	{
-		require_once('apigoogleplus.php');
+		require_once('googleplus.php');
 		$content_post = get_post($my_postid);
 		$gpap_guid =$content_post->guid;
 		$gpap_title =$content_post->post_title;
@@ -127,20 +127,20 @@ function wpspgpap()
 			if (!$loginconnection)
 			{
 				// link with page title display
-				$thumbnilcheck = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
+				$thumbnilcheck = wp_get_attachment_url( get_post_thumbnail_id($post->ID));
 				
 				if($thumbnilcheck!="")
 				{
 					$link = array('img'=>$thumbnilcheck,'link'=>$gpap_guid,'domain'=>'','title'=>$gpap_title,'txt'=>'');
 					$contentsss = get_post_field('post_content', $my_postid);
-					PostOnGooglePlus($contentsss,$link);	
+					googlepluspostfromwpsp($contentsss,$link);	
 					
 				}
 				else
 				{
-					$link = getlinkandtitle($content_post->guid);
+					$link = wpspgetlinkandtitle($content_post->guid);
 					$contentsss = get_post_field('post_content', $my_postid);
-					PostOnGooglePlus($contentsss,$link);	
+					googlepluspostfromwpsp($contentsss,$link);	
 					 
 				}
 			}
